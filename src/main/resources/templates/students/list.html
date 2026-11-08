@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Information System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header class="container mt-4">
+    <h2 class="system-header">Student Information System</h2>
+</header>
+
+<main class="container mt-4">
+
+    <h3 class="text-center mb-4">Student Information</h3>
+
+    <div class="mb-4">
+        <a th:href="@{/students/create}"
+           class="btn btn-success me-2">
+            + Student
+        </a>
+
+        <a th:href="@{/scores/create}"
+           class="btn btn-success">
+            + Score
+        </a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle">
+            <thead class="table-success">
+            <tr>
+                <th>Id</th>
+                <th>Student Id</th>
+                <th>Student Name</th>
+                <th>Subject Name</th>
+                <th>Score 1</th>
+                <th>Score 2</th>
+                <th>Credit</th>
+                <th>Grade</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="score : ${scores}">
+                <td th:text="${score.studentScoreId}"></td>
+                <td th:text="${score.student.studentCode}"></td>
+                <td th:text="${score.student.fullName}"></td>
+                <td th:text="${score.subject.subjectName}"></td>
+                <td th:text="${score.score1}"></td>
+                <td th:text="${score.score2}"></td>
+                <td th:text="${score.subject.credit}"></td>
+                <td>
+                    <span class="badge bg-success"
+                          th:text="${score.grade}">
+                    </span>
+                </td>
+            </tr>
+
+            <tr th:if="${#lists.isEmpty(scores)}">
+                <td colspan="8" class="text-center">
+                    Chưa có dữ liệu điểm sinh viên
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</main>
+
+</body>
+</html>
